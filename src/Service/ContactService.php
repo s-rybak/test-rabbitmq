@@ -10,6 +10,7 @@
 namespace App\Service;
 
 use App\DTO\ContactDTO;
+use App\DTO\ContactQueryDTO;
 use App\Entity\Contact;
 use App\Repository\ContactRepositoryInterface;
 use App\Resource\AMQPMessageResource;
@@ -36,7 +37,8 @@ class ContactService implements ContactServiceInterface
     public function __construct(
         ContactRepositoryInterface $repository,
         ProducerInterface $producer
-    ) {
+    )
+    {
         $this->repository = $repository;
         $this->producer = $producer;
     }
@@ -77,5 +79,15 @@ class ContactService implements ContactServiceInterface
     public function forceCloseDBConnection()
     {
         $this->repository->forceCloseConnection();
+    }
+
+    public function query(ContactQueryDTO $queryDTO): ?iterable
+    {
+        return $this->repository->query($queryDTO);
+    }
+
+    public function length(ContactQueryDTO $queryDTO): int
+    {
+        return $this->repository->length($queryDTO);
     }
 }

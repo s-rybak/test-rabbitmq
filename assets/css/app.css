@@ -1,0 +1,20 @@
+body{
+    background: linear-gradient(to right, #3a7fd5, #6ebce2);
+}
+#contacs_wrapper{
+    padding: 10px 15px;
+    border: 1px solid silver;
+    border-radius: 9px;
+    box-shadow: 1px 1px 6px 0px #9a9a9a;
+    background: rgba(255, 255, 255, 0.8);
+}
+.page-title{
+    text-align: center;
+    margin: 10px 0px 20px 0px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    padding: 0px;
+}
+.custom-select{
+    background: none;
+}

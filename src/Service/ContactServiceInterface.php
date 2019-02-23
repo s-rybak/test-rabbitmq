@@ -10,6 +10,7 @@
 namespace App\Service;
 
 use App\DTO\ContactDTO;
+use App\DTO\ContactQueryDTO;
 use App\Entity\Contact;
 
 interface ContactServiceInterface
@@ -21,5 +22,10 @@ interface ContactServiceInterface
     public function lazyCreate(ContactDTO $contactDTO);
 
     public function forceCloseDBConnection();
+
+    public function query(ContactQueryDTO $queryDTO): ?iterable;
+
+    public function length(ContactQueryDTO $queryDTO): int;
+
 
 }

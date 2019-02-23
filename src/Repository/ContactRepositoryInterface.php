@@ -9,6 +9,7 @@
 
 namespace App\Repository;
 
+use App\DTO\ContactQueryDTO;
 use App\Entity\Contact;
 
 /**
@@ -22,4 +23,8 @@ interface ContactRepositoryInterface
     public function save(Contact $contact): Contact;
 
     public function forceCloseConnection();
+
+    public function query(ContactQueryDTO $queryDTO): ?iterable;
+
+    public function length(ContactQueryDTO $queryDTO): int;
 }

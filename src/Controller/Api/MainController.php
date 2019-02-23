@@ -10,10 +10,12 @@
 namespace App\Controller\Api;
 
 use App\Api\Response\ResponseBuilder;
+use App\Api\Transformer\ContactResourseTransformer;
 use App\Api\Transformer\EmptyResourseTransformer;
 use App\Service\ContactServiceInterface;
 use App\Transformers\ContactDTOToArrayTransformer;
 use App\Transformers\RequestToContactDTOTransformer;
+use App\Transformers\RequestToContactQueryDTOTransformer;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -83,8 +85,14 @@ class MainController extends FOSRestController
      */
     public function getRows(Request $request): View
     {
+        $query = (new RequestToContactQueryDTOTransformer($request))->transform();
+
         return $this->view(
-            ResponseBuilder::getInstance(new EmptyResourseTransformer())
+            ResponseBuilder::getInstance(new ContactResourseTransformer())
+                ->setEntities(
+                    $this->service->query($query),
+                    $this->service->length($query)
+                )
                 ->getResponse()
                 ->setMessage('Rows')
                 ->setStatus('success'),

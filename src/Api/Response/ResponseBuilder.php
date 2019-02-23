@@ -65,14 +65,17 @@ final class ResponseBuilder
      *
      * @return ResponseBuilder
      */
-    public function setEntities($entities): self
+    public function setEntities($entities, $total = false): self
     {
-        $data = [];
+        $data = [
+            'entities' => [],
+            'total' => $total ?? count($entities),
+        ];
         foreach ($entities as $entity) {
             $resource = new Resource($this->resourceTransformer->getType());
             $resource->setId($entity->getId());
             $resource->setAttributes($this->resourceTransformer->getAttributes($entity));
-            $data[] = $resource;
+            $data['entities'][] = $resource;
         }
         $this->response->setData($data);
         $this->response->setLinks([]);
