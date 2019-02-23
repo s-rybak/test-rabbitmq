@@ -48,6 +48,8 @@ class ContactRepository extends ServiceEntityRepository implements ContactReposi
     public function query(ContactQueryDTO $queryDTO): ?iterable
     {
         return $this->prepareQuery($queryDTO)
+            ->setMaxResults($queryDTO->getLength())
+            ->setFirstResult($queryDTO->getStart())
             ->getQuery()
             ->getResult();
 
@@ -79,8 +81,6 @@ class ContactRepository extends ServiceEntityRepository implements ContactReposi
             $qb->orderBy("c.{$queryDTO->getOrderBy()}", strtoupper($ascDesc));
         }
 
-        return $qb
-            ->setMaxResults($queryDTO->getLength())
-            ->setFirstResult($queryDTO->getStart());
+        return $qb;
     }
 }

@@ -77,8 +77,9 @@ final class ResponseBuilder
             $resource->setAttributes($this->resourceTransformer->getAttributes($entity));
             $data['entities'][] = $resource;
         }
+
         $this->response->setData($data);
-        $this->response->setLinks([]);
+        $this->response->setLinks($this->resourceTransformer->getLinks());
 
         return $this;
     }

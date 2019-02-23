@@ -44,7 +44,7 @@ class ContactResourseTransformer implements ResourceTransformerInterface
      *
      * @return iterable
      */
-    public function getLinks($entity): iterable
+    public function getLinks($entity = null): iterable
     {
         return [
             'all' => [
