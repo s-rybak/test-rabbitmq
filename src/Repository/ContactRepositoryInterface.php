@@ -20,4 +20,6 @@ use App\Entity\Contact;
 interface ContactRepositoryInterface
 {
     public function save(Contact $contact): Contact;
+
+    public function forceCloseConnection();
 }

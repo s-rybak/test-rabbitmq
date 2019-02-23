@@ -11,6 +11,9 @@ namespace App\Controller\Api;
 
 use App\Api\Response\ResponseBuilder;
 use App\Api\Transformer\EmptyResourseTransformer;
+use App\Service\ContactServiceInterface;
+use App\Transformers\ContactDTOToArrayTransformer;
+use App\Transformers\RequestToContactDTOTransformer;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -24,8 +27,14 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class MainController extends FOSRestController
 {
-    public function __construct()
+    /**
+     * @var ContactServiceInterface
+     */
+    private $service;
+
+    public function __construct(ContactServiceInterface $contactService)
     {
+        $this->service = $contactService;
     }
 
     /**
@@ -36,15 +45,26 @@ class MainController extends FOSRestController
      *
      * @return View
      *
-     * @Rest\Get("/row/add")
+     * @Rest\Post("/row/add")
      */
-    public function getAddRow(Request $request): View
+    public function postAddRow(Request $request): View
     {
+
+        //TODO add validation
+
+        $contact = (new RequestToContactDTOTransformer($request))->transform();
+
+        $this->service->lazyCreate(
+            (new RequestToContactDTOTransformer($request))
+                ->transform()
+        );
+
         return $this->view(
             ResponseBuilder::getInstance(new EmptyResourseTransformer())
                 ->getResponse()
-            ->setMessage('Test')
-            ->setStatus('success'),
+                ->setData((new ContactDTOToArrayTransformer($contact))->transform())
+                ->setMessage('Task added')
+                ->setStatus('success'),
             Response::HTTP_OK);
     }
 }

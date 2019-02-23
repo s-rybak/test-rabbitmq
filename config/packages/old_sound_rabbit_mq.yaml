@@ -1,0 +1,25 @@
+old_sound_rabbit_mq:
+    connections:
+        default:
+            url: '%env(RABBITMQ_URL)%'
+    producers:
+        # use 'old_sound_rabbit_mq.task_producer' service to send data.
+        add_contact:
+            connection:       default
+            exchange_options: { name: 'add.contact.v1', type: direct }
+        retry_add_contact:
+            connection: default
+            exchange_options:
+                name: 'retry.add.contact.v1'
+                type: direct
+            queue_options:
+                name: 'retry.add.contact.v1'
+                arguments:
+                    x-message-ttl: ['I', 30000]
+                    x-dead-letter-exchange: ['S', 'add.contact.v1']
+    consumers:
+        add_contact:
+            connection:       default
+            exchange_options: { name: 'add.contact.v1', type: direct }
+            queue_options:    { name: 'add.contact.v1'}
+            callback:         app.consumer.add_contact

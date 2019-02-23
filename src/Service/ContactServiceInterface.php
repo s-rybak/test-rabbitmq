@@ -17,4 +17,9 @@ interface ContactServiceInterface
     public function save(Contact $contact): Contact;
 
     public function create(ContactDTO $contactDTO): Contact;
+
+    public function lazyCreate(ContactDTO $contactDTO);
+
+    public function forceCloseDBConnection();
+
 }

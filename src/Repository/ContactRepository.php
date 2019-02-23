@@ -26,4 +26,13 @@ class ContactRepository extends ServiceEntityRepository implements ContactReposi
         $em->flush();
         return $contact;
     }
+
+    public function forceCloseConnection()
+    {
+        $em = $this->getEntityManager();
+
+        $em->clear();
+        $em->getConnection()->close();
+
+    }
 }
