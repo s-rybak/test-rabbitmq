@@ -49,7 +49,6 @@ class MainController extends FOSRestController
      */
     public function postAddRow(Request $request): View
     {
-
         //TODO add validation
 
         $contact = (new RequestToContactDTOTransformer($request))->transform();
@@ -62,8 +61,32 @@ class MainController extends FOSRestController
         return $this->view(
             ResponseBuilder::getInstance(new EmptyResourseTransformer())
                 ->getResponse()
+                ->setLinks([
+                    'all' => [
+                        'href' => '/api/rows',
+                    ],
+                ])
                 ->setData((new ContactDTOToArrayTransformer($contact))->transform())
                 ->setMessage('Task added')
+                ->setStatus('success'),
+            Response::HTTP_OK);
+    }
+
+    /**
+     * Get all rows.
+     *
+     * @param Request $request
+     *
+     * @return View
+     *
+     * @Rest\Get("/rows")
+     */
+    public function getRows(Request $request): View
+    {
+        return $this->view(
+            ResponseBuilder::getInstance(new EmptyResourseTransformer())
+                ->getResponse()
+                ->setMessage('Rows')
                 ->setStatus('success'),
             Response::HTTP_OK);
     }
