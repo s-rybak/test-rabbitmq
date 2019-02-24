@@ -34,7 +34,6 @@ class AMQPMessageResourceToContactDTOTransformer
     public function transform(): ContactDTO
     {
         try {
-
             $data = $this->AMQPMessage->getData();
 
             return (new ContactDTO())

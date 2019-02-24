@@ -40,7 +40,6 @@ class AMQPMessageToAMQPResourceTransformer
                 ->setDescription($message['description'])
                 ->setTrys($message['trys'])
                 ->setData($message['data']);
-
         } catch (\Exception $exception) {
             throw new WrongAMQPMessageException($exception);
         }

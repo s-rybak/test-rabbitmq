@@ -16,5 +16,4 @@ namespace App\Exception;
  */
 class AMQPMessageTrysLimitExceededException extends \DomainException
 {
-
 }

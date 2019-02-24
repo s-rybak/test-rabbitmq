@@ -16,5 +16,4 @@ namespace App\Exception;
  */
 class WrongAMQPMessageException extends \DomainException
 {
-
 }

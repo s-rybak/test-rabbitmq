@@ -13,10 +13,9 @@ use App\DTO\ContactDTO;
 use App\Entity\Contact;
 
 /**
- * Transform contactDTO to Contact entity
+ * Transform contactDTO to Contact entity.
  *
  * Class ContactDTOToContactTransformer
- * @package App\Transformers
  */
 class ContactDTOToContactTransformer
 {
@@ -24,18 +23,14 @@ class ContactDTOToContactTransformer
 
     public function __construct(ContactDTO $contactDTO)
     {
-
         $this->contactDTO = $contactDTO;
-
     }
 
     public function transform(): Contact
     {
-
         return (new Contact())
             ->setFirstName($this->contactDTO->getFirstName())
             ->setLastName($this->contactDTO->getLastName())
             ->setPhoneNumbers($this->contactDTO->getPhoneNumbers());
-
     }
 }

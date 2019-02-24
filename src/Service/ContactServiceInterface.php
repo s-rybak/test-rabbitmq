@@ -26,6 +26,4 @@ interface ContactServiceInterface
     public function query(ContactQueryDTO $queryDTO): ?iterable;
 
     public function length(ContactQueryDTO $queryDTO): int;
-
-
 }

@@ -49,7 +49,7 @@ class ContactResourseTransformer implements ResourceTransformerInterface
         return [
             'all' => [
                 'href' => '/api/rows',
-            ]
+            ],
         ];
     }
 }

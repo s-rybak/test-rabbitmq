@@ -52,12 +52,10 @@ class ContactRepository extends ServiceEntityRepository implements ContactReposi
             ->setFirstResult($queryDTO->getStart())
             ->getQuery()
             ->getResult();
-
     }
 
     public function length(ContactQueryDTO $queryDTO): int
     {
-
         return intval($this->prepareQuery($queryDTO)
             ->select('COUNT(c)')
             ->getQuery()

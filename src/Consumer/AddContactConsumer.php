@@ -104,7 +104,6 @@ class AddContactConsumer implements ConsumerInterface
         $this->contactService->forceCloseDBConnection();
 
         gc_collect_cycles();
-
     }
 
     /**

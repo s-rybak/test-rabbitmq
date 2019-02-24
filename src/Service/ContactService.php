@@ -37,8 +37,7 @@ class ContactService implements ContactServiceInterface
     public function __construct(
         ContactRepositoryInterface $repository,
         ProducerInterface $producer
-    )
-    {
+    ) {
         $this->repository = $repository;
         $this->producer = $producer;
     }

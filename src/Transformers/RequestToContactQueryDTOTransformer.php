@@ -9,7 +9,6 @@
 
 namespace App\Transformers;
 
-use App\DTO\ContactDTO;
 use App\DTO\ContactQueryDTO;
 use Symfony\Component\HttpFoundation\Request;
 
